@@ -6,15 +6,6 @@ class itop (
 )
 {
 
-#  include stdlib
-
-#  validate_hash($itop_vhosts)
-#  if ( $itop_vhosts )
-#  {
-    #$vhosts = hiera('itop::itop_vhosts')
-#    create_resources('itop::resource::vhosts', $itop_vhosts)
-#  }
-
   anchor  { 'itop::start': }->
   class   { 'itop::install':
     ensure       => $ensure,
