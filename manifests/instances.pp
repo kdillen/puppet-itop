@@ -17,7 +17,7 @@ class itop::instances (
   validate_hash($vhosts_hash)
   if( $vhosts_hash )
   {
-    #create_resources( 'itop::virtualhosts', $vhosts_hash )
+    create_resources( 'itop::virtualhosts', $vhosts_hash )
   }
 
 }
