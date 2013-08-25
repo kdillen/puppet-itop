@@ -8,12 +8,10 @@ define itop::vhosts (
   $group      = 'apache',
   $toolkit    = false,
   $env        = production,
+  $source     = undef,
   $extensions = [],
 )
 {
-
-  ### Local variables
-  $source = $itop::sourcedir
 
   $perm_change = [
     "${docroot}/conf", "${docroot}/data", "${docroot}/env-production",
@@ -45,7 +43,13 @@ define itop::vhosts (
   }
 
   ## iTop Extensions installation
-  itop::myextensions{ $extensions: }
+  itop::myextensions{ $extensions:
+        docroot => $docroot,
+        source  => $source,
+        user    => $user,
+        group   => $group,
+        env     => $env,
+  }
 
   ### File permissions on certain directories.
   file { $perm_change:

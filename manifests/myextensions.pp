@@ -1,14 +1,14 @@
 #
 #
 #
-define itop::myextensions()
+define itop::myextensions(
+  $docroot = undef,
+  $source = undef,
+  $user = undef,
+  $group = undev,
+  $env = undev,
+)
 {
-
-  $docroot = $itop::vhosts::docroot
-  $source = $itop::sourcedir
-  $user = $itop::vhosts::user
-  $group = $itop::vhosts::group
-  $env = $itop::vhosts::env
 
   file { $name:
     ensure  => directory,
