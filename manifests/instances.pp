@@ -3,7 +3,7 @@
 #
 class itop::instances (
   $instance_hash = hiera('itop::instance_hash', {}),
-  $itop_vhosts_hash = hiera('itop::itop_vhosts_hash', {})
+  $itop_instance_hash = hiera('itop::itop_instance_hash', {})
 )
 {
   Class['itop::install'] -> Class['itop::instances']
@@ -14,10 +14,10 @@ class itop::instances (
     create_resources( 'itop::instance', $instance_hash )
   }
 
-  validate_hash($itop_vhosts_hash)
-  if( $itop_vhosts_hash )
+  validate_hash($itop_instance_hash)
+  if( $itop_instance_hash )
   {
-    create_resources( 'itop::vhosts', $itop_vhosts_hash )
+    create_resources( 'itop::itopinstance', $itop_instance_hash )
   }
 
 }

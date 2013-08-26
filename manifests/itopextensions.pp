@@ -1,7 +1,7 @@
 #
 #
 #
-define itop::myextensions(
+define itop::itopextensions(
   $docroot = undef,
   $source = undef,
   $user = undef,

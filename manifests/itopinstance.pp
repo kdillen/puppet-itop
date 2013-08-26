@@ -1,7 +1,7 @@
 #
-# define itop::vhosts
+# define itop::itopinstance
 #
-define itop::vhosts (
+define itop::itopinstance (
   $version            = $itop::ensure,
   $docroot            = '/var/www/html',
   $user               = 'apache',
@@ -23,7 +23,7 @@ define itop::vhosts (
 
   $perm_change = [
     "${docroot}/conf", "${docroot}/data", "${docroot}/env-production",
-    "${docroot}/extensions", "${docroot}/log"
+    "${docroot}/extensions", "${docroot}/log", "${docroot}/env-toolkit"
   ]
 
   ## iTop installation
@@ -51,7 +51,7 @@ define itop::vhosts (
   }
 
   ## iTop Extensions installation
-  itop::myextensions{ $extensions:
+  itop::itopextensions{ $extensions:
         docroot => $docroot,
         source  => $source,
         user    => $user,
