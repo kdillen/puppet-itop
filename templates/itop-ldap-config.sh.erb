@@ -1,11 +1,11 @@
 #!/bin/bash
 
-extension = <%= @ldap_extension %>
+extension=<%= @ldap_extension %>
 
-module_file = "module.${extension}.php
+module_file="module.${extension}.php"
 
-docroot = <%= @docroot %>
-extdir = "${docroot}/extensions/${extension}"
+docroot=<%= @docroot %>
+extdir="${docroot}/extensions/${extension}"
 
 cd $extdir
 
@@ -26,5 +26,8 @@ sed -i "s/'base_dn' => 'dc=yourcompany,dc=com'/'base_dn' => '<%= @ldap_base_dn %
 <% end -%>
 <% if @ldap_profile_dn -%>
 sed -i "s/'profile_dn' => 'ou=itop,ou=groups,dc=yourcompany,dc=com'/'profile_dn' => '<%= @ldap_profile_dn %>'/g" ${module_file}
+<% end -%>
+<% if @ldap_profile_query -%>
+sed -i "s/'profile_query' => '(|(uniqueMember=uid=%1$s*))'/'profile_query' => '<%= @ldap_profile_query %>'/g" ${module_file}
 <% end -%>
 

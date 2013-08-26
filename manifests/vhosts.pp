@@ -17,7 +17,6 @@ define itop::vhosts (
   $ldap_base_dn       = undef,
   $ldap_profile_dn    = undef,
   $ldap_profile_query = undef,
-  $ldap_user_query    = undef,
   $extensions         = [],
 )
 {
@@ -68,5 +67,30 @@ define itop::vhosts (
     mode    => '0750',
     require => File["iTop-${version}"],
   }
+
+  ### Install the ldap configuration script
+  file { '/usr/local/bin':
+    ensure => directory,
+  }
+
+  file { '/usr/local/bin/itop-ldap-config.sh':
+    ensure  => file,
+    content => template('itop/itop-ldap-config.sh.erb'),
+    mode    => '0750',
+    require => [
+      File['/usr/local/bin'],
+      File[$ldap_extension],
+    ]
+  }
+
+  ### Execute the LDAP configuration script
+  exec { "LDAP_Configuration_${name}":
+    command   => '/usr/local/bin/itop-ldap-config.sh',
+    subscribe => [
+      File['/usr/local/bin/itop-ldap-config.sh'],
+      File[$ldap_extension],
+    ]
+  }
+
 
 }
