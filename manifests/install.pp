@@ -12,7 +12,7 @@ class itop::install (
     ensure => $ensure,
     url    => $url,
   }
-#  class { 'itop::extensions':
-#    extension_hash => $extension_hash
-#  }
+  class { 'itop::extensions':
+    extension_hash => $extension_hash
+  }
 }
