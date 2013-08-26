@@ -2,14 +2,23 @@
 # define itop::vhosts
 #
 define itop::vhosts (
-  $version    = $itop::ensure,
-  $docroot    = '/var/www/html-new',
-  $user       = 'apache',
-  $group      = 'apache',
-  $toolkit    = false,
-  $env        = production,
-  $source     = undef,
-  $extensions = [],
+  $version            = $itop::ensure,
+  $docroot            = '/var/www/html',
+  $user               = 'apache',
+  $group              = 'apache',
+  $toolkit            = false,
+  $env                = production,
+  $source             = undef,
+  $ldap_extension     = undef,
+  $ldap_host          = undef,
+  $ldap_port          = undef,
+  $ldap_default_user  = undef,
+  $ldap_default_pwd   = undef,
+  $ldap_base_dn       = undef,
+  $ldap_profile_dn    = undef,
+  $ldap_profile_query = undef,
+  $ldap_user_query    = undef,
+  $extensions         = [],
 )
 {
 

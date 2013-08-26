@@ -1,0 +1,30 @@
+#!/bin/bash
+
+extension = <%= @ldap_extension %>
+
+module_file = "module.${extension}.php
+
+docroot = <%= @docroot %>
+extdir = "${docroot}/extensions/${extension}"
+
+cd $extdir
+
+<% if @ldap_host -%>
+sed -i 's/localhost/<%= @ldap_host %>/g' ${module_file}
+<% end -%>
+<% if @ldap_port -%>
+sed -i 's/=> 389/=> <%= @ldap_port %>/g' ${module_file}
+<% end -%>
+<% if @ldap_default_user -%>
+sed -i "s/'default_user' => ''/'default_user' => '<%= @ldap_default_user %>'/g" ${module_file}
+<% end -%>
+<% if @ldap_default_pwd -%>
+sed -i "s/'default_pwd' => ''/'default_pwd' => '<%= @ldap_default_pwd %>'/g" ${module_file}
+<% end -%>
+<% if @ldap_base_dn -%>
+sed -i "s/'base_dn' => 'dc=yourcompany,dc=com'/'base_dn' => '<%= @ldap_base_dn %>'/g" ${module_file}
+<% end -%>
+<% if @ldap_profile_dn -%>
+sed -i "s/'profile_dn' => 'ou=itop,ou=groups,dc=yourcompany,dc=com'/'profile_dn' => '<%= @ldap_profile_dn %>'/g" ${module_file}
+<% end -%>
+
